@@ -56,6 +56,7 @@ def run(method, architecture, output_dir, test_level):
     test_level: Zero indicates no testing. One indicates testing with real data.
       Two is for testing with fake data.
   """
+
   fake_data = test_level > 1
   gfile.makedirs(output_dir)
   model_opts, data_opts_list = get_experiment_config(method, architecture,

@@ -52,7 +52,8 @@ def write_npz(output_dir, basename, stats_dict):
   }
   np.savez_compressed(bytesio, **stats_dict)
   path = '%s/%s' % (output_dir, basename)
-  logging.info('Recording stats to %s', path)
+  # logging.info('Recording stats to %s', path)
+  print('Recording stats to %s' % path)
   with gfile.GFile(path, 'wb') as file_handle:
     file_handle.write(bytesio.getvalue())
 
@@ -70,8 +71,10 @@ def load_npz(path, as_namedtuple=False):
   Returns:
     Dictionary (or namedtuple) of npz file contents.
   """
-  with gfile.GFile(path) as fl:
-    bytesio = io.BytesIO(fl.read())
+  with gfile.GFile(path, 'rb') as fl:
+    bytesio = io.BytesIO(
+      fl.read()
+    )
   out = dict(np.load(bytesio))
   return _dict_as_namedtuple(out) if as_namedtuple else out
 

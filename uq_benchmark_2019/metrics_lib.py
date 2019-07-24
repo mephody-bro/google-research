@@ -147,6 +147,7 @@ def get_multiclass_predictions_and_correctness(probabilities, labels, top_k=1):
   _check_rank_nonempty(rank=1, labels=labels)
   _check_rank_nonempty(rank=2, probabilities=probabilities)
 
+
   if top_k == 1:
     class_predictions = np.argmax(probabilities, -1)
     top_k_probs = probabilities[np.arange(len(labels)), class_predictions]

@@ -41,8 +41,11 @@ MNIST_IMAGE_SHAPE = (28, 28, 1)
 DATA_OPTS_ROLL = [dict(split='test', roll_pixels=k) for k in range(2, 28, 2)]
 DATA_OPTS_ROTATE = [dict(split='test', rotate_degs=k)
                     for k in range(15, 181, 15)]
-DATA_OPTS_OOD = [dict(split='test', dataset_name='fashion_mnist'),
-                 dict(split='test', dataset_name='not_mnist')]
+# DATA_OPTS_OOD = [dict(split='test', dataset_name='fashion_mnist'),
+#                  dict(split='test', dataset_name='not_mnist')]
+
+
+DATA_OPTS_OOD = [dict(split='test', dataset_name='not_mnist')]
 
 DATA_OPTIONS_LIST = [
     dict(split='train'),
@@ -83,7 +86,8 @@ def _tfr_parse_fn(serialized, img_bytes_key='image/encoded'):
 
 def _mnist_dataset_from_tfr(split_name):
   # train_small contains the first 50K rows the train set; valid is the last 10K
-  split_key = 'train_small' if split_name == 'train' else split_name
+  # split_key = 'train_small' if split_name == 'train' else split_name
+  split_key = split_name
   path = FLAGS.mnist_path_tmpl % split_key
   logging.info('Reading dataset from %s', path)
   parse_fn = functools.partial(_tfr_parse_fn, img_bytes_key='image/encoded')
@@ -95,7 +99,8 @@ def _not_mnist_dataset_from_tfr(split_name):
     raise ValueError('We should only use NotMNIST test data.')
   path = FLAGS.not_mnist_path_tmpl % split_name
   logging.info('Reading dataset from %s', path)
-  parse_fn = functools.partial(_tfr_parse_fn, img_bytes_key='image/raw')
+  parse_fn = functools.partial(_tfr_parse_fn, img_bytes_key='image/encoded')
+  # parse_fn = functools.partial(_tfr_parse_fn, img_bytes_key='image/raw')
   return tf.data.TFRecordDataset(path).map(parse_fn)
 
 
