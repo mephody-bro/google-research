@@ -41,16 +41,23 @@ MNIST_IMAGE_SHAPE = (28, 28, 1)
 DATA_OPTS_ROLL = [dict(split='test', roll_pixels=k) for k in range(2, 28, 2)]
 DATA_OPTS_ROTATE = [dict(split='test', rotate_degs=k)
                     for k in range(15, 181, 15)]
-# DATA_OPTS_OOD = [dict(split='test', dataset_name='fashion_mnist'),
-#                  dict(split='test', dataset_name='not_mnist')]
-
 
 DATA_OPTS_OOD = [dict(split='test', dataset_name='not_mnist')]
 
 DATA_OPTIONS_LIST = [
-    dict(split='train'),
-    dict(split='valid'),
-    dict(split='test')] + DATA_OPTS_ROLL + DATA_OPTS_ROTATE + DATA_OPTS_OOD
+                        dict(split='train'),
+                        dict(split='valid'),
+                        dict(split='test')] + DATA_OPTS_OOD
+
+# DATA_OPTS_OOD = [dict(split='test', dataset_name='fashion_mnist'),
+#                  dict(split='test', dataset_name='not_mnist')]
+
+# DATA_OPTIONS_LIST = [
+#     dict(split='train'),
+#     dict(split='valid'),
+#     dict(split='test')] + DATA_OPTS_ROLL + DATA_OPTS_ROTATE + DATA_OPTS_OOD
+
+
 
 
 FLAGS = flags.FLAGS
