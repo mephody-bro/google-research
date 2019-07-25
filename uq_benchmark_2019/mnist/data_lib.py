@@ -47,18 +47,7 @@ DATA_OPTS_OOD = [dict(split='test', dataset_name='not_mnist')]
 DATA_OPTIONS_LIST = [
                         dict(split='train'),
                         dict(split='valid'),
-                        dict(split='test')] + DATA_OPTS_OOD
-
-# DATA_OPTS_OOD = [dict(split='test', dataset_name='fashion_mnist'),
-#                  dict(split='test', dataset_name='not_mnist')]
-
-# DATA_OPTIONS_LIST = [
-#     dict(split='train'),
-#     dict(split='valid'),
-#     dict(split='test')] + DATA_OPTS_ROLL + DATA_OPTS_ROTATE + DATA_OPTS_OOD
-
-
-
+                        dict(split='test')] + DATA_OPTS_ROLL + DATA_OPTS_ROTATE + DATA_OPTS_OOD
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string('mnist_path_tmpl', None,
