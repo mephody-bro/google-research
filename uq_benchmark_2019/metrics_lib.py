@@ -203,7 +203,6 @@ def compute_accuracies_at_confidences(labels, probs, thresholds):
   predict_confidence = probs.max(-1)
 
   shape = (len(thresholds),) + probs.shape[:-2]
-  print('shape', shape)
   accuracies = np.zeros(shape)
   counts = np.zeros(shape)
 
@@ -213,6 +212,16 @@ def compute_accuracies_at_confidences(labels, probs, thresholds):
     counts[i] = mask.sum(-1)
     accuracies[i] = np.ma.masked_array(eq, mask=~mask).mean(-1)
   return accuracies, counts
+
+
+def compute_confidences(confidences, thresholds):
+    shape = (len(thresholds),)
+    counts = np.zeros(shape)
+
+    for i, thresh in enumerate(thresholds):
+        mask = confidences >= thresh
+        counts[i] = mask.sum(-1)
+    return counts
 
 
 def brier_scores(labels, probs=None, logits=None):
