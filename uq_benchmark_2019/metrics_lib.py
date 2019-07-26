@@ -203,6 +203,7 @@ def compute_accuracies_at_confidences(labels, probs, thresholds):
   predict_confidence = probs.max(-1)
 
   shape = (len(thresholds),) + probs.shape[:-2]
+  print('shape', shape)
   accuracies = np.zeros(shape)
   counts = np.zeros(shape)
 
